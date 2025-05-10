@@ -1,0 +1,23 @@
+{
+  "name": "cypress_ui_automation",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rukky22/Cypress_UI_Automation.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rukky22/Cypress_UI_Automation/issues"
+  },
+  "homepage": "https://github.com/Rukky22/Cypress_UI_Automation#readme",
+  "description": "",
+  "devDependencies": {
+    "cypress": "^14.3.3"
+  }
+}
