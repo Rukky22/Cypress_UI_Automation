@@ -12,5 +12,3 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           command: npm run test:registerUsers
-          browser: chrome
-          headless: true
