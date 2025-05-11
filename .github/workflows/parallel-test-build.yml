@@ -1,7 +1,7 @@
 name: Parallel Test Build
 on: push
 jobs:
-  registration-new-users:
+  registration-of-new-users:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
