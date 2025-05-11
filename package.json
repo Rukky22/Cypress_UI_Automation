@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "test:registerUsers": "npx cypress run --spec cypress/e2e/test/registerTest.cy.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,6 +19,7 @@
   "homepage": "https://github.com/Rukky22/Cypress_UI_Automation#readme",
   "description": "",
   "devDependencies": {
-    "cypress": "^14.3.3"
+    "cypress": "^14.3.3",
+    "cypress-mochawesome-reporter": "^3.8.2"
   }
 }

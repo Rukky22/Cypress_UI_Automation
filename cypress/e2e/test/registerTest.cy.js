@@ -1,7 +1,7 @@
 // import { RegisterPage } from "../../pages/registerPages";
 // import registerData from "../../fixtures/registerData.json"
 
-const { RegisterPage } = require("../../pages/registerPages");
+const { RegisterPage } = require("../../pages/registerPage");
 const registerData = require("../../fixtures/registerData.json");
 
 const registerObj = new RegisterPage();
@@ -18,6 +18,6 @@ describe("cypress ui automation framework", () => {
 
     //Assertions
     cy.url().should("include", "/success");
-    cy.contains('Your Account Has Been Created!').should('be.visible');
+    cy.contains("Your Account Has Been Created!").should("be.visible");
   });
 });
