@@ -1,4 +1,4 @@
-name: Regression testing
+name: Sanity build
 on: push
 jobs:
   cypress-run:
@@ -10,3 +10,5 @@ jobs:
       # and run all Cypress tests
       - name: Cypress run
         uses: cypress-io/github-action@v6
+        with: //We just want to run specific test using script
+        command: npm run test:registerUsers  //Copy script name from package.json
