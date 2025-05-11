@@ -2,17 +2,21 @@
 // import registerData from "../../fixtures/registerData.json"
 
 const { RegisterPage } = require("../../pages/registerPage");
-const registerData = require("../../fixtures/registerData.json");
-
 const registerObj = new RegisterPage();
+//const registerData = require("../../fixtures/registerData");
+
+import { generateUserData } from "../../support/generateUserData";
+
 describe("cypress ui automation framework", () => {
-  it("Validate that users can register with valid credentials", () => {
+  it("Registration of a new user", () => {
+    const user = generateUserData();
     registerObj.openURL();
-    registerObj.enterFirstName(registerData.firstName);
-    registerObj.enterLastName(registerData.lastName);
-    registerObj.enterEmail(registerData.email);
-    registerObj.enterTelephone(registerData.phoneNo);
-    registerObj.enterPassword(registerData.password);
+    registerObj.enterFirstName(user.firstName);
+    registerObj.enterLastName(user.lastName);
+    registerObj.enterEmail(user.email);
+    registerObj.enterTelephone(user.phoneNo);
+    registerObj.enterPassword(user.password);
+
     registerObj.selectCheckbox();
     registerObj.clickonContinueButton();
 
