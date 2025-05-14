@@ -5,6 +5,7 @@
   "scripts": {
     "test:registerUsers": "npx cypress run --spec cypress/e2e/test/registerTest.cy.js",
     "test:addToCart": "npx cypress run --spec cypress/e2e/test/addToCartTest.cy.js",
+    "test:browsertype": "npx cypress run --spec cypress/e2e/test/addToCartTest.cy.js --browser firefox",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
