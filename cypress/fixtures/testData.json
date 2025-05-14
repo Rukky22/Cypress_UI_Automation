@@ -8,5 +8,8 @@
   },
   "message": {
     "successMessage": "Success: You have added MacBook Air to your shopping cart!"
+  },
+  "partialNameProduct":{
+    "productName":"mac"
   }
 }
