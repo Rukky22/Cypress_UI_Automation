@@ -13,6 +13,7 @@ jobs:
           command: npm run test:registerUsers
 
       - name: Upload HTML Report
+        if: always() # This ensures that a report is generated for all test - positive and negative
         uses: actions/upload-artifact@v4
         with:
           name: Registration-Report
@@ -30,6 +31,7 @@ jobs:
           command: npm run test:addToCart
 
       - name: Upload HTML Report
+        if: always() # This ensures that a report is generated for all test - positive and negative
         uses: actions/upload-artifact@v4
         with:
           name: AddToCart-Report
