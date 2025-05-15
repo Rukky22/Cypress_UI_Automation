@@ -6,20 +6,67 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      # Install npm dependencies, cache them correctly
-      # and run all Cypress tests
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          filter: "blob:none" # Fixed the colon here
+
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
           command: npm run test:registerUsers
+
+      - name: Upload HTML Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: Registration-Report
+          path: cypress/reports/html/
+
+      - name: Upload Videos
+        uses: actions/upload-artifact@v4
+        with:
+          name: Registration-Videos
+          path: cypress/videos/
+
   add-to-cart:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      # Install npm dependencies, cache them correctly
-      # and run all Cypress tests
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          filter: "blob:none" # Fixed the colon here
+
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
           command: npm run test:addToCart
+
+      - name: Upload HTML Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: AddToCart-Report
+          path: cypress/reports/html/
+
+      - name: Upload Videos
+        uses: actions/upload-artifact@v4
+        with:
+          name: AddToCart-Videos
+          path: cypress/videos/
