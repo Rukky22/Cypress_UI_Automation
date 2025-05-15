@@ -1,6 +1,6 @@
 class HomePage {
   WebLocators = {
-    searchInput: 'input[name="search"]1',
+    searchInput: 'input[name="search"]',
     searchButton: '[class="btn btn-default btn-lg"]',
     addtocart: "Add to Cart",
     messageLocator: '[class="alert alert-success alert-dismissible"]'
