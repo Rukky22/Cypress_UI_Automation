@@ -7,7 +7,7 @@ const registerObj = new RegisterPage();
 
 import { generateUserData } from "../../support/generateUserData";
 
-describe("cypress ui automation framework", () => {
+describe("Cypress ui automation framework", () => {
   it("Registration of a new user", () => {
     const user = generateUserData();
     registerObj.openURL();

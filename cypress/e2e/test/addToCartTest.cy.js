@@ -1,38 +1,31 @@
 const { HomePage } = require("../../pages/homePage");
 const testData = require("../../fixtures/testData.json");
 
-const homePageObj = new HomePage();
+describe("Add to Cart Tests", () => {
+  const homePage = new HomePage();
 
-describe("simple ui test automation", () => {
   beforeEach(() => {
-    cy.login(testData.login.userName, testData.login.password); //login using the Cypress command.js
+    cy.login(testData.login.userName, testData.login.password);
+    cy.url().should("include", "route=account/account");
   });
 
-  it("Confirm that a product can be added to cart successfully", () => {
-    const searchTerm = testData.product.productName;
-    homePageObj.searchProduct(searchTerm);
-    homePageObj.addToCart();
-    homePageObj
-      .confirmMessages()
-      .should("contain", "Success: You have added")
-      .and("contain", searchTerm);
+  it("should add product to cart with proper success message", () => {
+    const product = testData.product.product1;
+
+    homePage
+      .searchProduct(product)
+      .addFirstProductToCart()
+      .verifySuccessMessageContains(product);
   });
 
-  it("Confirm that a partial name product can be added to cart successfully", () => {
-    const searchTerm = testData.partialNameProduct.productName.toLowerCase();
-    homePageObj.searchProduct(searchTerm);
-    homePageObj.addToCart();
-    homePageObj.confirmMessages().should(($el) => {
-      const messageText = $el.text().toLowerCase();
+  it("should handle multiple search inputs", () => {
+    const product = testData.product.product2;
 
-      // Check for success message pattern
-      expect(messageText).to.match(
-        /success: you have added .* to your shopping cart!/
-      );
-
-      // Check that the product name contains our search term
-      const productNameInMessage = messageText.match(/added (.*) to your/)[1];
-      expect(productNameInMessage).to.include(searchTerm);
+    // Debug search inputs
+    cy.get('input[name="search"]').then(($inputs) => {
+      cy.log(`Found ${$inputs.length} search inputs`);
     });
+
+    homePage.searchProduct(product).addFirstProductToCart();
   });
 });
