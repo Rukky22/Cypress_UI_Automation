@@ -3,10 +3,19 @@
     "userName": "test10@grr.la",
     "password": "#password"
   },
-  "product": {
-    "product1": "MacBook Air",
-    "product2": "Apple Cinema 30",
-    "product3": "Samsung Galaxy Tab 10.1"
+  "products": {
+    "macBook": {
+      "name": "MacBook Air",
+      "price": "$1,202.00"
+    },
+    "iphone": {
+      "name": "iphone",
+      "price": "$123.20"
+    },
+    "samsung": {
+      "name": "Samsung Galaxy Tab 10.1",
+      "price": "$241.99"
+    }
   },
   "message": {
     "successMessage": "Success: You have added MacBook Air to your shopping cart!"
