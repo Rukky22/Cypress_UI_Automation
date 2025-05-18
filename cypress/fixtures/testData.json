@@ -3,13 +3,17 @@
     "userName": "test10@grr.la",
     "password": "#password"
   },
+  "product": {
+    "product1": "MacBook Air",
+    "product2": "Apple Cinema 30"
+  },
   "products": {
     "macBook": {
       "name": "MacBook Air",
       "price": "$1,202.00"
     },
     "iphone": {
-      "name": "iphone",
+      "name": "Iphone",
       "price": "$123.20"
     },
     "samsung": {

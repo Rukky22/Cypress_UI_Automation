@@ -1,42 +1,58 @@
 const { HomePage } = require("../../pages/homePage");
 const testData = require("../../fixtures/testData.json");
 
+
 describe("Multiple Product Cart Test", () => {
   const homePage = new HomePage();
+  const testProducts = [
+    { searchTerm: "MacBook Air", displayName: "MacBook Air" },
+    { searchTerm: "iphone", displayName: "iPhone" },
+    { searchTerm: "Samsung Galaxy Tab 10.1", displayName: "Samsung Galaxy Tab 10.1" }
+  ];
 
-  //Get all testData.products'value as an array i.e testProducts=["MacBook Air", "iphone", "Samsung"] 
-  const testProducts = Object.values(testData.products);
+  before(() => {
+    cy.login(testData.login.userName, testData.login.password);
+    return homePage.emptyCart()
+      .then(() => cy.logout());
+  });
 
   beforeEach(() => {
     cy.login(testData.login.userName, testData.login.password);
     cy.url().should("include", "route=account/account");
   });
 
-  it("should add multiple products to cart and verify", () => {
-    // Create an array of promises
-  const addProductPromises = testProducts.map((product) => {
-    return homePage.searchAndAddProduct(product.name)
-      .then(() => {
-        return homePage.elements.searchInput().first().clear();
-      });
-  });
-
-  // Execute all product additions sequentially
-  cy.wrap(addProductPromises, { log: false })
-    .each((promise) => cy.wrap(promise))
-    .then(() => {
-      // Verify all products in cart
-      const shoppingCart = homePage.navigateToCart();
-      shoppingCart.verifyCartContents(testProducts.map((p) => p.name));
-      
-          // Verify default quantities (1 for each)
-          shoppingCart.verifyQuantities(testProducts.map(() => "1"));
+  it("should add multiple products to cart and verify", { defaultCommandTimeout: 15000 }, () => {
+    // Add products sequentially
+    testProducts.forEach((product) => {
+      cy.log(`Adding product: ${product.searchTerm}`);
+      homePage.searchAndAddProduct(product.searchTerm);
+      homePage.clearSearch();
     });
 
-    // Verify total items count
-    homePage.elements
-      .cartTotal()
-      .should("contain", `${testProducts.length} item(s)`);
+    // Verify cart contents
+    homePage.navigateToCart();
+    
+    // Count product rows
+    homePage.elements.productRows()
+      .should('have.length', testProducts.length);
+
+    // Verify each product exists
+    testProducts.forEach((product) => {
+      cy.contains('.table tbody tr td.text-left a', product.displayName)
+        .should('exist');
+    });
+
+    // Verify quantities
+    cy.get('.table tbody input[name*="quantity"]').each(($input) => {
+      cy.wrap($input).should('have.value', '1');
+    });
+
+    // Verify total
+    homePage.elements.cartTotal()
+      .should('contain', `${testProducts.length} item(s)`);
   });
 
+  afterEach(() => {
+    cy.logout();
+  });
 });

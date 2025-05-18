@@ -11,6 +11,14 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
       // implement node event listeners here
       require("cypress-mochawesome-reporter/plugin")(on);
+      // Register task for logging
+      on("task", {
+        log(message) {
+          console.log(message);
+          return null;
+        },
+      });
+      return config;
     },
   },
 });
